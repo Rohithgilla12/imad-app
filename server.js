@@ -4,24 +4,64 @@ var path = require('path');
 
 var app = express();
 app.use(morgan('combined'));
-var articleOne={
-    title:'Article 1 | Rohith Gilla',
-    heading:'Article 1',
-    date:'Aug 15, 2017',
-    content:`  
-            <p>
-                    Hey writing HTML after such a ling time :p so I am really excited. Hey writing HTML after such a ling time :p so I am really excited
-                    Hey writing HTML after such a ling time :p so I am really excited
-                </p>
+var articles={
+    articleOne :{
+        title:'Article 1 | Rohith Gilla',
+        heading:'Article 1',
+        date:'Aug 15, 2017',
+        content:`  
                 <p>
-                    Hey writing HTML after such a ling time :p so I am really excited. Hey writing HTML after such a ling time :p so I am really excited
-                    Hey writing HTML after such a ling time :p so I am really excited
-                </p>
-                
+                        Hey writing HTML after such a ling time :p so I am really excited. Hey writing HTML after such a ling time :p so I am really excited
+                        Hey writing HTML after such a ling time :p so I am really excited
+                    </p>
+                    <p>
+                        Hey writing HTML after such a ling time :p so I am really excited. Hey writing HTML after such a ling time :p so I am really excited
+                        Hey writing HTML after such a ling time :p so I am really excited
+                    </p>
+                    
+                    <p>
+                        Hey writing HTML after such a ling time :p so I am really excited. Hey writing HTML after such a ling time :p so I am really excited
+                        Hey writing HTML after such a ling time :p so I am really excited
+                    </p>`
+    },
+     articleTwo :{
+        title:'Article 2 | Rohith Gilla',
+        heading:'Article 2',
+        date:'Aug 15, 2017',
+        content:`  
                 <p>
-                    Hey writing HTML after such a ling time :p so I am really excited. Hey writing HTML after such a ling time :p so I am really excited
-                    Hey writing HTML after such a ling time :p so I am really excited
-                </p>`
+                        Hey writing HTML after such a ling time :p so I am really excited. Hey writing HTML after such a ling time :p so I am really excited
+                        Hey writing HTML after such a ling time :p so I am really excited
+                    </p>
+                    <p>
+                        Hey writing HTML after such a ling time :p so I am really excited. Hey writing HTML after such a ling time :p so I am really excited
+                        Hey writing HTML after such a ling time :p so I am really excited
+                    </p>
+                    
+                    <p>
+                        Hey writing HTML after such a ling time :p so I am really excited. Hey writing HTML after such a ling time :p so I am really excited
+                        Hey writing HTML after such a ling time :p so I am really excited
+                    </p>`
+    },
+    articleThree :{
+        title:'Article 3 | Rohith Gilla',
+        heading:'Article 3',
+        date:'Aug 15, 2017',
+        content:`  
+                <p>
+                        Hey writing HTML after such a ling time :p so I am really excited. Hey writing HTML after such a ling time :p so I am really excited
+                        Hey writing HTML after such a ling time :p so I am really excited
+                    </p>
+                    <p>
+                        Hey writing HTML after such a ling time :p so I am really excited. Hey writing HTML after such a ling time :p so I am really excited
+                        Hey writing HTML after such a ling time :p so I am really excited
+                    </p>
+                    
+                    <p>
+                        Hey writing HTML after such a ling time :p so I am really excited. Hey writing HTML after such a ling time :p so I am really excited
+                        Hey writing HTML after such a ling time :p so I am really excited
+                    </p>`
+    }
 };
 function createTemplate(data){
     var title=data.title;
