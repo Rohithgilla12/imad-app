@@ -7,7 +7,7 @@ app.use(morgan('combined'));
 var articleOne={
     title:'Article 1 | Rohith Gilla',
     heading:'Article 1',
-    date:'Aug 14, 2017',
+    date:'Aug 15, 2017',
     content:`  
             <p>
                     Hey writing HTML after such a ling time :p so I am really excited. Hey writing HTML after such a ling time :p so I am really excited
