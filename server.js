@@ -27,7 +27,7 @@ var articles={
      articleTwo :{
         title:'Article 2 | Rohith Gilla',
         heading:'Article 2',
-        date:'Aug 15, 2017',
+        date:'Aug 19, 2017',
         content:`  
                 <p>
                         Hey writing HTML after such a ling time :p so I am really excited. Hey writing HTML after such a ling time :p so I am really excited
@@ -46,7 +46,7 @@ var articles={
     articleThree :{
         title:'Article 3 | Rohith Gilla',
         heading:'Article 3',
-        date:'Aug 15, 2017',
+        date:'Aug 21, 2017',
         content:`  
                 <p>
                         Hey writing HTML after such a ling time :p so I am really excited. Hey writing HTML after such a ling time :p so I am really excited
