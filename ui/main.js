@@ -10,7 +10,6 @@ img.onclick = function () {
     var interval = setInterval(moveRight, 50);
 
 };
-var counter = 0;
 var button = document.getElementById('counter');
 
 button.onclick = function () {
@@ -25,7 +24,7 @@ button.onclick = function () {
         }
     };
     request.open('GET', 'http://gillarohith1.imad.hasura-app.io/counter', true);
-    request.send(null)
+    request.send(null);
 
 
 };
