@@ -4,12 +4,12 @@ var path = require('path');
 
 var app = express();
 app.use(morgan('combined'));
-var articles={
-     'article-one' :{
-        title:'Article 1 | Rohith Gilla',
-        heading:'Article 1',
-        date:'Aug 15, 2017',
-        content:`  
+var articles = {
+    'article-one': {
+        title: 'Article 1 | Rohith Gilla',
+        heading: 'Article 1',
+        date: 'Aug 15, 2017',
+        content: `  
                 <p>
                         Hey writing HTML after such a ling time :p so I am really excited. Hey writing HTML after such a ling time :p so I am really excited
                         Hey writing HTML after such a ling time :p so I am really excited
@@ -24,11 +24,11 @@ var articles={
                         Hey writing HTML after such a ling time :p so I am really excited
                     </p>`
     },
-     'article-two' :{
-        title:'Article 2 | Rohith Gilla',
-        heading:'Article 2',
-        date:'Aug 19, 2017',
-        content:`  
+    'article-two': {
+        title: 'Article 2 | Rohith Gilla',
+        heading: 'Article 2',
+        date: 'Aug 19, 2017',
+        content: `  
                 <p>
                         Hey writing HTML after such a ling time :p so I am really excited. Hey writing HTML after such a ling time :p so I am really excited
                         Hey writing HTML after such a ling time :p so I am really excited
@@ -43,11 +43,11 @@ var articles={
                         Hey writing HTML after such a ling time :p so I am really excited
                     </p>`
     },
-     'article-three' :{
-        title:'Article 3 | Rohith Gilla',
-        heading:'Article 3',
-        date:'Aug 21, 2017',
-        content:`  
+    'article-three': {
+        title: 'Article 3 | Rohith Gilla',
+        heading: 'Article 3',
+        date: 'Aug 21, 2017',
+        content: `  
                 <p>
                         Hey writing HTML after such a ling time :p so I am really excited. Hey writing HTML after such a ling time :p so I am really excited
                         Hey writing HTML after such a ling time :p so I am really excited
@@ -63,13 +63,14 @@ var articles={
                     </p>`
     }
 };
-function createTemplate(data){
-    var title=data.title;
-    var date=data.date;
-    var content=data.content;
-    var heading=data.heading;
 
-    var htmlTemplate=`<!DOCTYPE html>
+function createTemplate(data) {
+    var title = data.title;
+    var date = data.date;
+    var content = data.content;
+    var heading = data.heading;
+
+    var htmlTemplate = `<!DOCTYPE html>
     <html>
         <head>
             <title>${title} </title>
@@ -96,27 +97,33 @@ function createTemplate(data){
     </html>`;
     return htmlTemplate;
 }
-var counter=0;
-app.get('/counter',function(req,res){
-    counter=counter+1;
+var counter = 0;
+app.get('/counter', function (req, res) {
+    counter = counter + 1;
     res.send(counter.toString());
 });
 app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'index.html'));
+    res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
-app.get('/:articleName',function(req,res){
-    var articleName=req.params.articleName;
-   res.send(createTemplate(articles[articleName]));
+app.get('/:articleName', function (req, res) {
+    var articleName = req.params.articleName;
+    res.send(createTemplate(articles[articleName]));
 });
 app.get('/ui/style.css', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'style.css'));
+    res.sendFile(path.join(__dirname, 'ui', 'style.css'));
 });
 app.get('/ui/main.js', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'main.js'));
+    res.sendFile(path.join(__dirname, 'ui', 'main.js'));
 });
 
 app.get('/ui/madi.png', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
+    res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
+});
+var names = [];
+app.get('/submit-name:name', function (req, res) {
+    var name = req.params.name;
+    names.push(name);
+    res.send(JSON.stringify(names));
 });
 
 
@@ -125,5 +132,5 @@ app.get('/ui/madi.png', function (req, res) {
 
 var port = 80;
 app.listen(port, function () {
-  console.log(`IMAD course app listening on port ${port}!`);
+    console.log(`IMAD course app listening on port ${port}!`);
 });
