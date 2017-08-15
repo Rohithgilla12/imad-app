@@ -4,6 +4,13 @@ var path = require('path');
 
 var app = express();
 app.use(morgan('combined'));
+var names = [];
+app.get('/submit-name/', function (req, res) { // submit-name/?name= 
+    var name = req.query.name;
+    names.push(name);
+    res.send(JSON.stringify(names));
+});
+
 var articles = {
     'article-one': {
         title: 'Article 1 | Rohith Gilla',
@@ -118,12 +125,6 @@ app.get('/ui/main.js', function (req, res) {
 
 app.get('/ui/madi.png', function (req, res) {
     res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
-});
-var names = [];
-app.get('/submit-name/', function (req, res) { // submit-name/?name= 
-    var name = req.query.name;
-    names.push(name);
-    res.send(JSON.stringify(names));
 });
 
 
