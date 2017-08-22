@@ -5,9 +5,11 @@ var Pool=require('pg').Pool;
 var config={
     user:'gillarohith1',
     database:'gillarohith1',
-    host:'db.imad.hasura-app.io',
+  //  host:'db.imad.hasura-app.io',
     port:'5432',
-    password:'db-gillarohith1-74120'
+    host: 'db.imad.hasura-app.io',
+    password: process.env.DB_PASSWORD
+    //password:'db-gillarohith1-74120'
     //password:process.env.DB_PASSWORD
 };
 var app = express();
