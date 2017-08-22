@@ -130,7 +130,7 @@ app.get('/user-db',function(req,res){
            
        } 
        else{
-           res.send(JSON.stringify(result));
+           res.send(JSON.stringify(result.rows));
        }
     });
 });
