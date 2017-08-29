@@ -157,11 +157,23 @@ app.post('/login',function(req,res){
    pool.query('INSERT INTO "user"(username,password) VALUES($1,$2)',[username,dbString],function(err,res){
          if(err){
            res.status(500).send(err.toString());
-           
+         
        } 
        else{
         if(result.rows.length===0){
             res.status(403).send('user not found asshole');
+        }
+        else{
+            var dbString=result.rows[0].password;
+            var salt=dbString.split('$')[2];
+            var hashedPassword=hash(password,salt);
+            if(hashedPassword===dbstring){
+                res.send('Correct details dude');
+            }
+            else{
+                res.status(403).send('user not found asshole');
+            }
+            
         }
        }
    });    
