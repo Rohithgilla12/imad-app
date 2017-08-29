@@ -154,7 +154,7 @@ app.post('/login',function(req,res){
    var username=req.body.username;
    var password=req.body.password;
    var dbString=hash(password,salt);
-   pool.query('INSERT INTO "user"(username,password) VALUES($1,$2)',[username,dbString],function(err,res){
+   pool.query('SELECT * FROM "user" WHERE username=$1',[username],function(err,res){
          if(err){
            res.status(500).send(err.toString());
          
