@@ -129,7 +129,7 @@ function hash(input,salt){
     
 }
 app.get('/hash/:input', function(req,res){
-    var hashedstring=hash(req.params.input);
+    var hashedstring=hash(req.params.input,'Gilla');
     res.send(hashedstring);
 });
 var pool=new Pool(config);
