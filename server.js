@@ -128,7 +128,7 @@ function hash(input,salt){
     return hashed.toString('hex');
     
 }
-app.get('/hash:input', function(req,res){
+app.get('/hash/:input', function(req,res){
     var hashedstring=hash(req.params.input);
     res.send(hashedstring);
 });
