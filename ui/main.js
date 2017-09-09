@@ -50,11 +50,11 @@ submit.onclick = function () {
             }
             if(request.status===403)
                 {
-                  alert('Check your Crendentials')  
+                  alert('Check your Crendentials') ;
                 }
             if(request.status===500)
                 {
-                    alert('Server down :(')
+                    alert('Server down :(');
                 }
         }
     };
@@ -63,6 +63,7 @@ submit.onclick = function () {
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
     request.open('POST', 'http://gillarohith1.imad.hasura-app.io/login' + name, true);
+    request.setRequestHeader('Content-Type','application/json');
     request.send(JSON.stringify({
         username: username,
         password: password
