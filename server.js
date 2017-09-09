@@ -1,15 +1,15 @@
 var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
-var crypto=require('crypto');
-var session=require('express-session');
-var Pool=require('pg').Pool;
-var bodyParser=require('body-parser');
-var config={
-    user:'gillarohith1',
-    database:'gillarohith1',
-  //  host:'db.imad.hasura-app.io',
-    port:'5432',
+var crypto = require('crypto');
+var session = require('express-session');
+var Pool = require('pg').Pool;
+var bodyParser = require('body-parser');
+var config = {
+    user: 'gillarohith1',
+    database: 'gillarohith1',
+    //  host:'db.imad.hasura-app.io',
+    port: '5432',
     host: 'db.imad.hasura-app.io',
     password: process.env.DB_PASSWORD
     //password:'db-gillarohith1-74120'
@@ -126,65 +126,63 @@ app.get('/counter', function (req, res) {
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
-function hash(input,salt){
-    var hashed=crypto.pbkdf2Sync(input,salt,10000,512,'sha512');
-    return ["pbkdf2","10000",salt,hashed.toString('hex')].join('$');
+
+function hash(input, salt) {
+    var hashed = crypto.pbkdf2Sync(input, salt, 10000, 512, 'sha512');
+    return ["pbkdf2", "10000", salt, hashed.toString('hex')].join('$');
 
 }
-app.get('/hash/:input', function(req,res){
-    var hashedstring=hash(req.params.input,'Gilla');
+app.get('/hash/:input', function (req, res) {
+    var hashedstring = hash(req.params.input, 'Gilla');
     res.send(hashedstring);
 });
-app.post('/create-user',function(req,res){
-   var username=req.body.username;
-   var password=req.body.password;
-   var salt = crypto.randomBytes(128).toString('hex');
-   //var salt=crypto.randomBytes(128).toString('hex');
-   var dbString=hash(password,salt);
-   pool.query('INSERT INTO "user"(username,password) VALUES($1,$2)',[username,dbString],function(err,result){
-         if(err){
-           res.status(500).send(err.toString());
+app.post('/create-user', function (req, res) {
+    var username = req.body.username;
+    var password = req.body.password;
+    var salt = crypto.randomBytes(128).toString('hex');
+    //var salt=crypto.randomBytes(128).toString('hex');
+    var dbString = hash(password, salt);
+    pool.query('INSERT INTO "user"(username,password) VALUES($1,$2)', [username, dbString], function (err, result) {
+        if (err) {
+            res.status(500).send(err.toString());
 
-       }
-       else{
-           res.send("User sucessfully created:"+username);
-       }
-   });
+        } else {
+            res.send("User sucessfully created:" + username);
+        }
+    });
 
 });
-app.post('/login',function(req,res){
-  var username=req.body.username;
-  var password=req.body.password;
-  var salt = crypto.randomBytes(128).toString('hex');
-  var dbString=hash(password,salt);
-  pool.query('SELECT * FROM "user" WHERE username=$1',[username],function(err,result){
-         if(err){
-          res.status(500).send(err.toString());
+app.post('/login', function (req, res) {
+    var username = req.body.username;
+    var password = req.body.password;
+    //   var salt = crypto.randomBytes(128).toString('hex');
+    //   var dbString=hash(password,salt);
 
-      }
-      else{
-        if(result.rows.length===0){
-            res.status(403).send('user not found asshole');
-        }
-        else{
-            var dbString=result.rows[0].password;
-            var salt=dbString.split('$')[2];
-            var hashedPassword=hash(password,salt);
-            if(hashedPassword===dbstring){
-                res.send('Correct details dude');
-            }
-            else{
+    pool.query('SELECT * FROM "user" WHERE username= $1', [username], function (err, result) {
+        if (err) {
+            res.status(500).send(err.toString());
+
+        } else {
+            if (result.rows.length === 0) {
                 res.status(403).send('user not found asshole');
-            }
+            } else {
+                var dbString = result.rows[0].password;
+                var salt = dbString.split('$')[2];
+                var hashedPassword = hash(password, salt);
+                if (hashedPassword === dbstring) {
+                    res.send('Correct details dude');
+                } else {
+                    res.status(403).send('user not found asshole');
+                }
 
+            }
         }
-      }
-  });
+    });
 });
 // app.post('/login', function (req, res) {
 //   var username = req.body.username;
 //   var password = req.body.password;
-   
+
 //   pool.query('SELECT * FROM "user" WHERE username = $1', [username], function (err, result) {
 //       if (err) {
 //           res.status(500).send(err.toString());
@@ -197,15 +195,15 @@ app.post('/login',function(req,res){
 //               var salt = dbString.split('$')[2];
 //               var hashedPassword = hash(password, salt); // Creating a hash based on the password submitted and the original salt
 //               if (hashedPassword === dbString) {
-                
+
 //                 // Set the session
 //                 req.session.auth = {userId: result.rows[0].id};
 //                 // set cookie with a session id
 //                 // internally, on the server side, it maps the session id to an object
 //                 // { auth: {userId }}
-                
+
 //                 res.send('credentials correct!');
-                
+
 //               } else {
 //                 res.status(403).send('username/password is invalid');
 //               }
@@ -213,34 +211,30 @@ app.post('/login',function(req,res){
 //       }
 //   });
 // });
-var pool=new Pool(config);
-app.get('/user-db',function(req,res){
-    pool.query('SELECT * FROM user',function(err,result){
-       if(err){
-           res.status(500).send(err.toString());
+var pool = new Pool(config);
+app.get('/user-db', function (req, res) {
+    pool.query('SELECT * FROM user', function (err, result) {
+        if (err) {
+            res.status(500).send(err.toString());
 
-       }
-       else{
-           res.send(JSON.stringify(result.rows));
-       }
+        } else {
+            res.send(JSON.stringify(result.rows));
+        }
     });
 });
 app.get('/articles/:articleName', function (req, res) {
     //var articleName = req.params.articleName;
-    pool.query("SELECT * FROM article WHERE title='"+req.params.articleName+"'",function(err,result){
-       if(err)
-       {
-           res.status(500).send(err.toString());
-       }else{
-           if(result.rows.length===0)
-           {
-               res.send('Article not found re asshole');
-           }
-           else{
-               var articleData=result.rows[0];
-               res.send(createTemplate(articleData));
-           }
-       }
+    pool.query("SELECT * FROM article WHERE title='" + req.params.articleName + "'", function (err, result) {
+        if (err) {
+            res.status(500).send(err.toString());
+        } else {
+            if (result.rows.length === 0) {
+                res.send('Article not found re asshole');
+            } else {
+                var articleData = result.rows[0];
+                res.send(createTemplate(articleData));
+            }
+        }
     });
 
 });
