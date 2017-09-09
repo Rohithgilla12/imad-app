@@ -58,8 +58,8 @@ submit.onclick = function () {
                 }
         }
     };
-    var nameInput = document.getElementById('name');
-    var name = nameInput.value;
+    //var nameInput = document.getElementById('name');
+    //var name = nameInput.value;
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
     request.open('POST', 'http://gillarohith1.imad.hasura-app.io/login', true);
