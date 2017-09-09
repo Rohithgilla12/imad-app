@@ -154,6 +154,7 @@ app.post('/create-user',function(req,res){
 app.post('/login',function(req,res){
    var username=req.body.username;
    var password=req.body.password;
+   var salt = crypto.randomBytes(128).toString('hex');
    var dbString=hash(password,salt);
    pool.query('SELECT * FROM "user" WHERE username=$1',[username],function(err,result){
          if(err){
