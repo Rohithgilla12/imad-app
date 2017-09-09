@@ -10,24 +10,24 @@ img.onclick = function () {
     var interval = setInterval(moveRight, 50);
 
 };
-var button = document.getElementById('counter');
+//var button = document.getElementById('counter');
 
-button.onclick = function () {
-    var request = new XMLHttpRequest();
-    request.onreadystatechange = function () {
-        if (request.readyState === XMLHttpRequest.DONE) {
-            if (request.status === 200) {
-                var counter = request.responseText;
-                var span = document.getElementById('count');
-                span.innerHTML = counter.toString();
-            }
-        }
-    };
-    request.open('GET', 'http://gillarohith1.imad.hasura-app.io/counter', true);
-    request.send(null);
+// button.onclick = function () {
+//     var request = new XMLHttpRequest();
+//     request.onreadystatechange = function () {
+//         if (request.readyState === XMLHttpRequest.DONE) {
+//             if (request.status === 200) {
+//                 var counter = request.responseText;
+//                 var span = document.getElementById('count');
+//                 span.innerHTML = counter.toString();
+//             }
+//         }
+//     };
+//     request.open('GET', 'http://gillarohith1.imad.hasura-app.io/counter', true);
+//     request.send(null);
 
 
-};
+// };
 
 var submit = document.getElementById('submit-btn');
 submit.onclick = function () {
@@ -62,7 +62,7 @@ submit.onclick = function () {
     var name = nameInput.value;
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
-    request.open('POST', 'http://gillarohith1.imad.hasura-app.io/login' + name, true);
+    request.open('POST', 'http://gillarohith1.imad.hasura-app.io/login', true);
     request.setRequestHeader('Content-Type','application/json');
     request.send(JSON.stringify({
         username: username,
