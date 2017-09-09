@@ -169,7 +169,7 @@ app.post('/login', function (req, res) {
                 var dbString = result.rows[0].password;
                 var salt = dbString.split('$')[2];
                 var hashedPassword = hash(password, salt);
-                if (hashedPassword === dbstring) {
+                if (hashedPassword === dbString) {
                     res.send('Correct details dude');
                 } else {
                     res.status(403).send('user not found asshole');
